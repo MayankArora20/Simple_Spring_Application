@@ -1,0 +1,42 @@
+package hackerrank;
+
+import java.util.*;
+
+public class LetterCombinationOfPhoneNumber {
+
+	public static List<String> combin(String inp)
+	{
+		List<String> res=new LinkedList();
+		res.add("");
+		HashMap<Integer,String> hm=new HashMap();
+		hm.put(2, "abc");
+		hm.put(3, "def");
+		hm.put(4, "ghi");
+		hm.put(5, "jkl");
+		hm.put(6, "mno");
+		hm.put(7, "pqrs");
+		hm.put(8, "tuv");
+		hm.put(9, "wxyz");
+		
+		for(int i=0;i<inp.length();i++)
+		{
+			int x=inp.charAt(i)-48;
+			String s=hm.get(x);
+			while(((String) ((LinkedList) res).peek()).length()==i)
+			{
+				String poped=(String)((LinkedList) res).poll();
+				for(int j=0;j<s.length();j++)
+					res.add(poped+s.charAt(j));
+				
+			}
+		}
+		
+		return res;
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(combin("23"));
+	}
+
+}

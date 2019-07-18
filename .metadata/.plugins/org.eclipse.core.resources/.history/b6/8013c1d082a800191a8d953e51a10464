@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hackerrank;
+
+/**
+ *
+ * @author SAMRAT
+ */
+    import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class ConvertIntsToBinaryWithSameDigits {
+	public static void main (String[] args)
+	{
+	  Scanner sc=new Scanner(System.in);
+          System.out.println("Enter array size");
+	   int n=sc.nextInt();
+	   long a[]=new long[n];
+	  
+           System.out.println("Enter elements in array");
+	   a[0]=sc.nextInt();
+	   long max=a[0];
+	   for(int i=1;i<n;i++)
+	    {
+	        a[i]=sc.nextInt();
+	        if(Math.abs(a[i])>Math.abs(max))
+	         max=a[i];
+	    }
+	    
+	    int l=Long.toBinaryString(max).length();
+	    String k="%"+l+"s";
+	   String b[]=new String[n];
+	   
+	   for(int i=0;i<n;i++)
+	   {
+	     b[i]=String.format(k,Long.toBinaryString(a[i])).replace(' ','0');
+	   }
+	    
+	    for(int i=0;i<n;i++)
+                  System.out.println("n:"+a[i]+" binary:"+b[i]+" "+b[i].length());
+  }
+}
+

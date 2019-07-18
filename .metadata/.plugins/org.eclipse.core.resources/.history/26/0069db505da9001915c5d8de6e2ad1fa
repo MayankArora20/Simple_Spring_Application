@@ -1,0 +1,52 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hackerrank;
+
+/**
+ *
+ * @author SAMRAT
+ */
+import java.util.Scanner;
+public class QuickSort {
+
+public int[] quick(int a[],int lt,int rt)
+    {
+        int pivot=lt;
+        lt++;
+        while(lt<rt)
+        {
+            int i,j;
+          for(i=lt;i<rt;i++)
+              if(a[i]>a[pivot])
+                  break;
+          for(j=rt;j>=i;j--)
+              if(a[j]<a[pivot])
+                  break;
+          if(i!=j)
+          {
+            a[i]+=a[j];
+            a[j]=a[i]-a[j];
+            a[i]-=a[j];
+          }
+          lt=i;
+          rt=j;
+        }
+        
+    }
+public static void main(String mk[])
+{
+    Scanner sc=new Scanner(System.in);
+    int n=sc.nextInt();
+    int arr[]=new int[n];
+    for(int i=0;i<n;i++)
+        arr[i]=sc.nextInt();
+    QuickSort ob=new QuickSort();
+    arr=ob.quick(arr, 0, n-1);
+    for(int i=0;i<n;i++)
+        System.out.println(arr[i]+" ");
+}
+    
+}

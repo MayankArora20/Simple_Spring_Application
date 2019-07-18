@@ -1,0 +1,31 @@
+package hackerrank;
+
+/**
+ *
+ * @author SAMRAT
+ */
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class DayOfWeek {
+	public static void main (String[] args)
+	 {
+	   Scanner sc=new Scanner(System.in);
+	   int t=sc.nextInt();
+	   while(t>0)
+	   {
+	       int d=sc.nextInt();
+	       int m=sc.nextInt();
+	       int y=sc.nextInt();
+	       int temp=14-m;
+	       temp/=12;
+	       y=y-temp;
+	       m=m-2+temp*12;
+	       int x=(d+y+(y/4)-(y/100)+(y/400)+((31*m)/12))%7;
+	       String ans[]={"Sunday","Monday","Tuesday","Wednesday","Thrusday","Friday","Saturday"};
+	        System.out.println(ans[x]);
+	        t--;
+	   }
+	 }    
+}

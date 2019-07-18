@@ -1,0 +1,111 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hackerrank;
+
+/**
+ *
+ * @author SAMRAT
+ */
+    import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class FindMissingNumInList {
+
+
+    // Complete the missingNumbers function below.
+    static int[] missingNumbers(int[] arr, int[] brr) {
+        
+        Arrays.sort(arr);
+        Arrays.sort(brr);
+        HashMap<Integer,Integer> hm=new HashMap();
+        int c[]=new int[brr.length-arr.length];
+
+        int i,j=0,k=0,common=0;
+        for( i=0;i<brr.length;i++)
+        {
+            if(brr[i]!=arr[j])
+            {
+                if(hm.get(brr[i])==null)
+                 {
+                     c[k++]=brr[i];
+                     hm.put(brr[i],0);
+                 }
+                 else
+                 common++;
+
+            }
+            else
+             j++;
+            if(j==arr.length)
+                break;
+        }
+        
+        while(i<brr.length)
+         {
+             if(k<c.length && hm.get(brr[i])==null)
+                 {
+                     System.out.println(k+" "+i+" "+j+" "+brr[i]+" ");
+                     c[k++]=brr[i];
+                     hm.put(brr[i],0);
+                 }
+             i++;
+         }
+        
+        if(common!=0)
+        {
+            int x[]=new int[c.length-common];
+            for(i=0;i<x.length;i++)
+              x[i]=c[i];
+              return x;
+        }
+        return c;
+    }
+  
+    
+    public static void main(String[] args) throws IOException {
+
+        Scanner scanner = new Scanner(new File("C:\\Users\\SAMRAT\\Documents\\NetBeansProjects\\hackerrank\\test\\test.txt"));
+
+        int n = scanner.nextInt();
+
+        int[] arr = new int[n];
+        int i=0;
+       for ( i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+            
+        //System.out.println(arr[i+1]);
+        }
+
+        
+        int m = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        int[] brr = new int[m];
+
+
+        for ( ; i < n+m; i++) {
+            brr[i-n] = scanner.nextInt();
+        }
+        
+        //.out.println(n+" "+m);
+        int[] result = missingNumbers(arr, brr);
+
+        for ( i = 0; i < result.length; i++) {
+            System.out.println(String.valueOf(result[i]));
+
+        }
+
+        scanner.close();
+    }
+
+    
+    
+}

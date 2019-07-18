@@ -1,0 +1,150 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+//package hackerrank;
+
+/**
+ *
+ * @author SAMRAT
+ */
+import java.io.*;
+import java.util.*;
+
+import java.util.*;
+
+class TrieNode {
+ HashMap<Character,TrieNode> hm;
+ 
+ TrieNode()
+ {
+     hm=new HashMap();
+ }
+ 
+ 
+
+ 
+ public TrieNode setChild(char s,TrieNode n)
+ {
+      
+         TrieNode x=new TrieNode();
+         hm.put(s, x);
+         //System.out.println(s+" insert "+hm.get(s));
+        return x;
+ }
+ 
+ /*
+ public void printNext(TrieNode ob,String s)
+ {
+     int count=0;
+     if(ob==null)
+         return;
+    
+     for(Map.Entry<Character, TrieNode> p:ob.hm.entrySet())
+        {
+         char c=p.getKey();
+          
+         if(count>0)
+            System.out.print(s+""+c);
+          else
+            System.out.print(c);
+          
+          TrieNode k=p.getValue();
+          //System.out.println(ob+" "+k);
+          printNext(k, s+c);
+          k=null;
+          
+          if(k==null)
+          {
+              System.out.println();
+              count++;
+          }
+        }
+ }*/
+ 
+}
+
+
+public class Trie {
+    
+    public static void insert(String s,TrieNode h)
+    {
+        TrieNode head=h;
+      for(int i=0;i<s.length();i++)
+        if(head.hm.get(s.charAt(i))==null)
+            {
+             if(i!=s.length()-1)
+                  head=head.setChild(s.charAt(i),head);
+             else
+                head.hm.put(s.charAt(i), null);
+            }
+        else
+        {
+          head=head.hm.get(s.charAt(i));
+          //System.out.println("\n"+s.charAt(i)+" pre-inserted "+head);
+        }
+    }
+    
+    public static int search(String s,TrieNode h)
+    {
+        TrieNode head=h;
+        int found=0;
+        for(int i=0;i<s.length();i++)
+        {
+            if(!head.hm.containsKey(s.charAt(i)))
+            {
+                insert(s.substring(i),head);
+                break;
+            }
+            else
+            if(head.hm.containsKey(s.charAt(i)))
+              if(head.hm.get(s.charAt(i))!=null)
+              { 
+                  if(i==s.length()-1)
+                  {
+                      found=1;
+                      break;
+                  }
+                  head=head.hm.get(s.charAt(i));
+                  System.out.println(s.charAt(i));
+              }
+              else
+              {
+                found=1;
+                System.out.println(s+" found=="+found);
+                break;
+              }
+        }
+        System.out.println(s+" found="+found);
+        return found;
+     }
+    
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        TrieNode head=new TrieNode();
+        Scanner sc=new Scanner(System.in);
+        
+        int x=0;
+        int n=sc.nextInt();
+        sc.nextLine();
+        String s=sc.nextLine();
+        insert(s,head);
+        for(int i=1;i<n;i++){
+            s=sc.nextLine();
+            System.out.println("s="+s);
+            
+                int b=search(s,head);
+                if(b!=0)
+                {
+                    System.out.println("BAD SET\n"+s+" "+i);
+                    x=1;
+                    break;
+                }    
+        }
+         
+        if(x==0)
+         System.out.println("GOOD SET");
+    }
+
+}
